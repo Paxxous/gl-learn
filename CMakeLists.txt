@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.19)
 
 project(gl
   VERSION "1.0.0"
@@ -27,10 +27,13 @@ find_package(OpenGL REQUIRED)
 add_subdirectory("lib/glfw/")
 add_subdirectory("lib/spdlog/")
 
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
   spdlog::spdlog
   glfw
   OpenGL::GL
 
+
   WINDOW
 )
+

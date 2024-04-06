@@ -4,13 +4,20 @@
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
 
+#include "constants.hpp"
 #include "window/window.hpp"
 
-// bet
+
+// opengl instructions here...
+void gl() {
+  glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
+}
+
 int main() {
-  spdlog::info("what");
-  vec3 v = {3, 4};
-  v.e();
+  // CLEANNNNN
+  Win win(W_WIDTH, W_HEIGHT);
+  win.mainloop(gl);
 
   return 0;
 }

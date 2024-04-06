@@ -1,6 +1,9 @@
 tmp/
 compile_commands.json
-.cache
+.cache/
+
+# telescope purposes :)
+lib/
 
 # Prerequisites
 *.d
