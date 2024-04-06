@@ -12,21 +12,25 @@ file(GLOB src_files
 
 add_executable(${PROJECT_NAME} ${src_files})
 
+add_subdirectory("src")
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-include_directories("lib/")
+include_directories(
+  "${CMAKE_SOURCE_DIR}/lib/"
+)
 
 find_package(OpenGL REQUIRED)
 add_subdirectory("lib/glfw/")
-add_subdirectory("lib/spdlog")
+add_subdirectory("lib/spdlog/")
 
-
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  spdlog::spdlog
   glfw
   OpenGL::GL
-  spdlog::spdlog
-)
 
+  WINDOW
+)
