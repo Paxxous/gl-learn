@@ -17,8 +17,10 @@ class Win {
   public:
     Win(int w_w, int w_h);
     
-    void set_title(const char* t);
-    void mainloop(void(*loop)());
+    void setTitle(const char* t);
+    // void mainLoop(void(*loop)());
+
+    GLFWwindow* getWinHandle();
 };
 
 void err_callback(int err, const char *description);

@@ -27,13 +27,10 @@ find_package(OpenGL REQUIRED)
 add_subdirectory("lib/glfw/")
 add_subdirectory("lib/spdlog/")
 
-
 target_link_libraries(${PROJECT_NAME} PUBLIC
   spdlog::spdlog
   glfw
   OpenGL::GL
-
-
-  WINDOW
 )
+
 
