@@ -4,33 +4,42 @@
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
 
-// #include "shader_utils.hpp"
 #include "constants.hpp"
+#include "shader.hpp"
 #include "window.hpp"
 
-const char* fragment_shader = R"(
+const std::string vertexShader = R"glsl(
 #version 330 core
-layout (location = 0) in vec3 aPos;
+layout(location = 0) in vec4 position;
 
 void main() {
-  gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
+  gl_Position = position;
 }
-)";
+)glsl";
+
+const std::string fragmentShader = R"glsl(
+#version 330 core
+layout(location = 0) out vec4 color;
+
+void main() {
+  color = vec4(1.0, 5.0, 5.0, 5.0);
+}
+)glsl";
 
 int main() {
-  // spdlog::info("Running OpenGL version {}", glGetString(GL_VERSION));
-
   Win win(W_WIDTH, W_HEIGHT);
-  GLFWwindow* handle = win.getWinHandle();
+  GLFWwindow *handle = win.getWinHandle();
+  win.setTitle("semen");
 
   // vertices triangle
   float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
-    0.5f, 0.5f, 0.0f,
+      -0.5f, -0.5f, 
+       0.5f, -0.5f, 
+       0.5f,  0.5f, 
   };
 
-  // create VBO, manages vertices in GPU (where we then tell it how to interpret the vertices)
+  // create VBO, manages vertices in GPU (where we then tell it how to interpret
+  // the vertices)
   unsigned int VBO;
   glGenBuffers(1, &VBO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -39,14 +48,15 @@ int main() {
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 
+  unsigned int shader = createShader(vertexShader, fragmentShader);
+  glUseProgram(shader);
 
   while (!glfwWindowShouldClose(handle)) {
-    if(glfwGetKey(handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(handle, true);
+    if (glfwGetKey(handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+      glfwSetWindowShouldClose(handle, true);
     }
 
     glClear(GL_COLOR_BUFFER_BIT);
-
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glfwSwapBuffers(handle);
