@@ -1,7 +1,26 @@
 #include "shader.hpp"
 
+#include <fstream>
+#include <string>
+#include <sstream>
 #include <spdlog/spdlog.h>
 #include <glad/glad.h>
+
+std::string parseShader(std::string path) {
+  spdlog::debug("reading shader {}", path);
+
+  std::ifstream f;
+  f.open(path);
+  std::string line;
+
+  std::stringstream ss;
+  ss << f.rdbuf(); //read the file
+  std::string read = ss.str(); //str holds the content of the file
+  f.close();
+
+  return read;
+}
+
 
 unsigned int compileShader(unsigned int type, const std::string src) {
   unsigned int id = glCreateShader(type);
@@ -33,14 +52,14 @@ int createShader(const std::string& vertexShader, const std::string& fragmentSha
   glLinkProgram(program);
   glValidateProgram(program);
 
+  // im literally zuckerberg bro
   int res;
+  glGetShaderiv(program, GL_LINK_STATUS, &res);
   if (res == GL_FALSE) {
     char infolog[512];
     glGetShaderInfoLog(program, 512, NULL, infolog);
     spdlog::error("failed to link shaders:\n {}", infolog);
-   
   }
-
 
   glDeleteShader(vs);
   glDeleteShader(fs);

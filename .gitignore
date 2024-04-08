@@ -1,6 +1,7 @@
 tmp/
 compile_commands.json
 .cache/
+build/
 
 # telescope purposes :)
 lib/

@@ -14,6 +14,20 @@ file(GLOB src_files
 
 add_executable(${PROJECT_NAME} ${src_files})
 
+configure_file(
+  "${PROJECT_SOURCE_DIR}/src/constants.hpp.in"
+  "${PROJECT_SOURCE_DIR}/src/constants.hpp"
+)
+
+add_custom_target(copy_res ALL
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${PROJECT_SOURCE_DIR}/src/res
+  ${PROJECT_BINARY_DIR}/res
+  COMMENT "copying res into binary dir"
+)
+
+add_dependencies(${PROJECT_NAME} copy_res)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

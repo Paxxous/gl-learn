@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.29.1/bin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/ben/Documents/dev/Cpp/gl/gl-learn
+CMAKE_SOURCE_DIR = /home/ben/dev/code/C++/gl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/ben/Documents/dev/Cpp/gl/gl-learn/build
+CMAKE_BINARY_DIR = /home/ben/dev/code/C++/gl/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/gl.dir/depend.make
@@ -70,60 +70,60 @@ include CMakeFiles/gl.dir/progress.make
 include CMakeFiles/gl.dir/flags.make
 
 CMakeFiles/gl.dir/src/glad.c.o: CMakeFiles/gl.dir/flags.make
-CMakeFiles/gl.dir/src/glad.c.o: /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/glad.c
+CMakeFiles/gl.dir/src/glad.c.o: /home/ben/dev/code/C++/gl/src/glad.c
 CMakeFiles/gl.dir/src/glad.c.o: CMakeFiles/gl.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/gl.dir/src/glad.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/gl.dir/src/glad.c.o -MF CMakeFiles/gl.dir/src/glad.c.o.d -o CMakeFiles/gl.dir/src/glad.c.o -c /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/glad.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ben/dev/code/C++/gl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/gl.dir/src/glad.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/gl.dir/src/glad.c.o -MF CMakeFiles/gl.dir/src/glad.c.o.d -o CMakeFiles/gl.dir/src/glad.c.o -c /home/ben/dev/code/C++/gl/src/glad.c
 
 CMakeFiles/gl.dir/src/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/gl.dir/src/glad.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/glad.c > CMakeFiles/gl.dir/src/glad.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ben/dev/code/C++/gl/src/glad.c > CMakeFiles/gl.dir/src/glad.c.i
 
 CMakeFiles/gl.dir/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/gl.dir/src/glad.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/glad.c -o CMakeFiles/gl.dir/src/glad.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ben/dev/code/C++/gl/src/glad.c -o CMakeFiles/gl.dir/src/glad.c.s
 
 CMakeFiles/gl.dir/src/main.cpp.o: CMakeFiles/gl.dir/flags.make
-CMakeFiles/gl.dir/src/main.cpp.o: /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/main.cpp
+CMakeFiles/gl.dir/src/main.cpp.o: /home/ben/dev/code/C++/gl/src/main.cpp
 CMakeFiles/gl.dir/src/main.cpp.o: CMakeFiles/gl.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gl.dir/src/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/main.cpp.o -MF CMakeFiles/gl.dir/src/main.cpp.o.d -o CMakeFiles/gl.dir/src/main.cpp.o -c /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ben/dev/code/C++/gl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gl.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/main.cpp.o -MF CMakeFiles/gl.dir/src/main.cpp.o.d -o CMakeFiles/gl.dir/src/main.cpp.o -c /home/ben/dev/code/C++/gl/src/main.cpp
 
 CMakeFiles/gl.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gl.dir/src/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/main.cpp > CMakeFiles/gl.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ben/dev/code/C++/gl/src/main.cpp > CMakeFiles/gl.dir/src/main.cpp.i
 
 CMakeFiles/gl.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gl.dir/src/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/main.cpp -o CMakeFiles/gl.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ben/dev/code/C++/gl/src/main.cpp -o CMakeFiles/gl.dir/src/main.cpp.s
 
 CMakeFiles/gl.dir/src/shader.cpp.o: CMakeFiles/gl.dir/flags.make
-CMakeFiles/gl.dir/src/shader.cpp.o: /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/shader.cpp
+CMakeFiles/gl.dir/src/shader.cpp.o: /home/ben/dev/code/C++/gl/src/shader.cpp
 CMakeFiles/gl.dir/src/shader.cpp.o: CMakeFiles/gl.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gl.dir/src/shader.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/shader.cpp.o -MF CMakeFiles/gl.dir/src/shader.cpp.o.d -o CMakeFiles/gl.dir/src/shader.cpp.o -c /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ben/dev/code/C++/gl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gl.dir/src/shader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/shader.cpp.o -MF CMakeFiles/gl.dir/src/shader.cpp.o.d -o CMakeFiles/gl.dir/src/shader.cpp.o -c /home/ben/dev/code/C++/gl/src/shader.cpp
 
 CMakeFiles/gl.dir/src/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gl.dir/src/shader.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/shader.cpp > CMakeFiles/gl.dir/src/shader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ben/dev/code/C++/gl/src/shader.cpp > CMakeFiles/gl.dir/src/shader.cpp.i
 
 CMakeFiles/gl.dir/src/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gl.dir/src/shader.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/shader.cpp -o CMakeFiles/gl.dir/src/shader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ben/dev/code/C++/gl/src/shader.cpp -o CMakeFiles/gl.dir/src/shader.cpp.s
 
 CMakeFiles/gl.dir/src/window.cpp.o: CMakeFiles/gl.dir/flags.make
-CMakeFiles/gl.dir/src/window.cpp.o: /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/window.cpp
+CMakeFiles/gl.dir/src/window.cpp.o: /home/ben/dev/code/C++/gl/src/window.cpp
 CMakeFiles/gl.dir/src/window.cpp.o: CMakeFiles/gl.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gl.dir/src/window.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/window.cpp.o -MF CMakeFiles/gl.dir/src/window.cpp.o.d -o CMakeFiles/gl.dir/src/window.cpp.o -c /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/window.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ben/dev/code/C++/gl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gl.dir/src/window.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/gl.dir/src/window.cpp.o -MF CMakeFiles/gl.dir/src/window.cpp.o.d -o CMakeFiles/gl.dir/src/window.cpp.o -c /home/ben/dev/code/C++/gl/src/window.cpp
 
 CMakeFiles/gl.dir/src/window.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/gl.dir/src/window.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/window.cpp > CMakeFiles/gl.dir/src/window.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ben/dev/code/C++/gl/src/window.cpp > CMakeFiles/gl.dir/src/window.cpp.i
 
 CMakeFiles/gl.dir/src/window.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/gl.dir/src/window.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ben/Documents/dev/Cpp/gl/gl-learn/src/window.cpp -o CMakeFiles/gl.dir/src/window.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ben/dev/code/C++/gl/src/window.cpp -o CMakeFiles/gl.dir/src/window.cpp.s
 
 # Object files for target gl
 gl_OBJECTS = \
@@ -142,9 +142,12 @@ gl: CMakeFiles/gl.dir/src/window.cpp.o
 gl: CMakeFiles/gl.dir/build.make
 gl: lib/glfw/src/libglfw3.a
 gl: lib/spdlog/libspdlog.a
-gl: /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+gl: /usr/lib/librt.a
+gl: /usr/lib/libm.so
+gl: /usr/lib/libGLX.so
+gl: /usr/lib/libOpenGL.so
 gl: CMakeFiles/gl.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable gl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ben/dev/code/C++/gl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable gl"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gl.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -156,6 +159,6 @@ CMakeFiles/gl.dir/clean:
 .PHONY : CMakeFiles/gl.dir/clean
 
 CMakeFiles/gl.dir/depend:
-	cd /Users/ben/Documents/dev/Cpp/gl/gl-learn/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/ben/Documents/dev/Cpp/gl/gl-learn /Users/ben/Documents/dev/Cpp/gl/gl-learn /Users/ben/Documents/dev/Cpp/gl/gl-learn/build /Users/ben/Documents/dev/Cpp/gl/gl-learn/build /Users/ben/Documents/dev/Cpp/gl/gl-learn/build/CMakeFiles/gl.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/ben/dev/code/C++/gl/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ben/dev/code/C++/gl /home/ben/dev/code/C++/gl /home/ben/dev/code/C++/gl/build /home/ben/dev/code/C++/gl/build /home/ben/dev/code/C++/gl/build/CMakeFiles/gl.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/gl.dir/depend
 
