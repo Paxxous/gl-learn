@@ -18,7 +18,6 @@ class Win {
     Win(int w_w, int w_h);
     
     void setTitle(const char* t);
-    // void mainLoop(void(*loop)());
 
     GLFWwindow* getWinHandle();
 };
