@@ -39,9 +39,9 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VBO); // we now bind a type of buffer to our VBO object
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // copy our VBO into memory
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // tell gl how to use our data
+                                                                                //
   unsigned int shader = createShader(vertexShader, fragmentShader);
   
-  bool tog = true;
   spdlog::debug("initing mainloop");
   while (!glfwWindowShouldClose(handle)) {
     if (glfwGetKey(handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -52,8 +52,13 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    glEnableVertexAttribArray(0); // enablit
+    float time = glfwGetTime();
+    float clr = (sin(time) / 2.0f) /* + 0.5f */;
+    int vertexColorLocation = glGetUniformLocation(shader, "vertexColor");
     glUseProgram(shader);
+    glUniform4f(vertexColorLocation, clr, 0.0f, 0.0f, 1.0f);
+
+    glEnableVertexAttribArray(0); // enablit
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0); // disablit
 
