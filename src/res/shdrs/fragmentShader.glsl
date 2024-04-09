@@ -1,4 +1,5 @@
 #version 330 core
+
 out vec4 FragColor;
 
 // all i know is that a fragment shader runs every pixel.
