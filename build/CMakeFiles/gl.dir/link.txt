@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/gl.dir/src/glad.c.o CMakeFiles/gl.dir/src/main.cpp.o CMakeFiles/gl.dir/src/shader.cpp.o CMakeFiles/gl.dir/src/window.cpp.o -o gl  lib/glfw/src/libglfw3.a lib/spdlog/libspdlog.a /usr/lib/librt.a -lm -ldl /usr/lib/libGLX.so /usr/lib/libOpenGL.so
