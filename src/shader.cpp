@@ -34,7 +34,6 @@ unsigned int compileShader(unsigned int type, const std::string src) {
     // thecherno includes some code that learnopengl just doesn't have...
     char infolog[512];
     glGetShaderInfoLog(id, 512, NULL, infolog);
-
     spdlog::error("failed to compile shader:\n {}", infolog);
   }
 

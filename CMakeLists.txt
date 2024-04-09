@@ -35,6 +35,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories("${CMAKE_SOURCE_DIR}/lib/")
 include_directories("${CMAKE_SOURCE_DIR}/lib/glfw/include")
+include_directories("${CMAKE_SOURCE_DIR}/lib/spdlog/include")
 
 add_subdirectory("lib/spdlog/")
 add_subdirectory("lib/glfw/")
