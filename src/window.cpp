@@ -7,7 +7,7 @@
 #include "window.hpp"
 
 void err_callback(int err, const char *description) {
-  spdlog::error("{} err: {}", err, description);
+  spdlog::error("GLFW err\n{} err: {}", err, description);
 }
 
 void framebuff_resize_callback(GLFWwindow *window, int w, int h) {
