@@ -9,7 +9,7 @@
 void playSound(const char* path) {
   ALCdevice* device = alcOpenDevice(NULL);
   ALCcontext* context;
-  if (!device) {
+  if (device) {
     context = alcCreateContext(device, NULL);
     alcMakeContextCurrent(context);
   } else {
@@ -23,6 +23,7 @@ void playSound(const char* path) {
 
   unsigned int buf;
   alGenBuffers(1, &buf);
+  alBufferData(buf, info.format, f, sizeof(f), info.samplerate);
 
   sf_close(f);
 }
