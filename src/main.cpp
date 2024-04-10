@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
-#include <AL/al.h>
 
 #include "constants.hpp"
 #include "shader.hpp"
