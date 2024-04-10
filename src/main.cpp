@@ -3,14 +3,18 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
+#include <AL/al.h>
 
 #include "constants.hpp"
 #include "shader.hpp"
 #include "window.hpp"
+#include "audio.hpp"
 
 int main() {
   spdlog::set_level(spdlog::level::debug);
   spdlog::info("project vrsn: {}", VERSION);
+
+  playSound("./res/audio/sound.wav");
 
   spdlog::debug("Setting up window..");
   Win win(W_WIDTH, W_HEIGHT);
