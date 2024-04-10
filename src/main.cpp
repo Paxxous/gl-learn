@@ -12,14 +12,10 @@ int main() {
   spdlog::set_level(spdlog::level::debug);
   spdlog::info("project vrsn: {}", VERSION);
 
-  spdlog::debug("reading shaders..");
-  const std::string fragmentShader = parseShader("./res/shdrs/fragmentShader.glsl");
-  const std::string vertexShader = parseShader("./res/shdrs/vertexShader.glsl");
-
   spdlog::debug("Setting up window..");
   Win win(W_WIDTH, W_HEIGHT);
   GLFWwindow *handle = win.getWinHandle();
-  win.setTitle("triangle fucking you");
+  win.setTitle("asdf");
 
   float vertices[] = {
     -0.5f, -0.5f, 0.0f,
@@ -49,9 +45,15 @@ int main() {
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(sizeof(float) * 9));
   glEnableVertexAttribArray(1); // enable
 
-  unsigned int shader = createShader(vertexShader, fragmentShader);
-  
-  spdlog::debug("initing mainloop");
+  Shader shader = Shader(
+    "./res/shdrs/vertexShader.glsl",
+    "./res/shdrs/fragmentShader.glsl"
+  );
+
+
+float clrPrev = 0;
+bool togg = true;
+spdlog::debug("Entering mainloop");
   while (!glfwWindowShouldClose(handle)) {
     if (glfwGetKey(handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       glfwSetWindowShouldClose(handle, true);
@@ -61,12 +63,21 @@ int main() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     float time = glfwGetTime();
-    float clr = (sin(time * 50)) + 3;
-    // spdlog::debug("{}", clr);
+    float clr = (sin(time * 10)) + 1.75f;
 
-    int vertexColorLocation = glGetUniformLocation(shader, "posQ");
+    if (clrPrev < clr && togg == true) {
+      spdlog::debug("peak? {}", clr);
+      togg = false;
+    } else if  (clrPrev > clr && togg == false) {
+      // spdlog::debug("peak? {}", clr);
+      togg = true;
+    }
+
+    clrPrev = clr;
+
+    int vertexColorLocation = glGetUniformLocation(shader.getShaderID(), "posQ");
     glUniform1f(vertexColorLocation, clr);
-    glUseProgram(shader);
+    glUseProgram(shader.getShaderID());
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
     glfwSwapBuffers(handle);
