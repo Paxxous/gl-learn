@@ -1,11 +1,28 @@
 #include "audio.hpp"
-#include "window.hpp"
 
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <sndfile.h>
 
 #include <spdlog/spdlog.h>
+
+ALvoid* readWAV(const char* path, ALenum &format, ALsizei &size, ALsizei &samplerate) {
+  SF_INFO info;
+  SNDFILE* f = sf_open(path, SFM_READ, &info);
+  if (!f) {
+    spdlog::error("Error reading wav file: {}", sf_strerror(f));
+  } else if (info.frames < 1) {
+    spdlog::error("Bad sample count in {}", path);
+  } else {
+    spdlog::debug("Success reading {}", path);
+  }
+
+  // now we have to fucking decode everything :sob:
+
+
+  sf_close(f);
+  return (void*)0; // for now
+}
 
 void playSound(const char* path) {
   ALCdevice* device = alcOpenDevice(NULL);
@@ -17,43 +34,20 @@ void playSound(const char* path) {
     spdlog::error("Error loading audio file");
   }
 
-  alGetError();
-
-  ALenum err, format;
-
-  // read our wav file...
-  SF_INFO info;
-  SNDFILE* f = sf_open(path, SFM_READ, &info);
-  if (!f) {
-    spdlog::error("Error reading wav file: {}", sf_strerror(f));
-  } else if (info.frames < 1) {
-    spdlog::error("Bad sample count in {}", path);
-  } else {
-    spdlog::debug("Success reading {}", path);
-  }
-
-  // let's not deal ab anything above 2 channels...
-  format = AL_NONE;
-  switch (info.channels) {
-    case 1: 
-      format = AL_FORMAT_MONO16;
-      break;
-    case 2: 
-      format = AL_FORMAT_STEREO16;
-      break;
-  }
-
-
-  ALvoid* dat;
-  dat = static_cast<short*>(malloc((size_t)(info.frames * info.channels) * sizeof(short)));
-
-  bytes = (ALsizei)(info.frames)
+  ALenum format;
+  ALsizei size;
+  ALsizei freq;
+  ALboolean loop;
+  ALvoid *dat = readWAV(path, format, size, freq);
+  // spdlog::debug("{}, {}, {}", format, size, freq);
 
   unsigned int buff;
   alGenBuffers(1, &buff);
-  alBufferData(buff, format, dat, ALsizei size, info.samplerate);
+  // alBufferData(ALuint buffer, ALenum format, const ALvoid *data, ALsizei size, ALsizei samplerate)
 
 
-  free(dat);
-  sf_close(f);
+  alGetError();
+
+
 }
+
