@@ -4,7 +4,7 @@ compile_commands.json
 build/
 
 # telescope purposes :)
-lib/
+# lib/
 
 # Prerequisites
 *.d

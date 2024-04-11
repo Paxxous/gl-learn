@@ -1,4 +1,5 @@
 #define GLFW_INCLUDE_NONE
+#define MINIAUDIO_IMPLEMENTATION
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -13,12 +14,12 @@ int main() {
   spdlog::set_level(spdlog::level::debug);
   spdlog::info("project vrsn: {}", VERSION);
 
-  playSound("./res/audio/sound.wav");
-
   spdlog::debug("Setting up window..");
   Win win(W_WIDTH, W_HEIGHT);
   GLFWwindow *handle = win.getWinHandle();
   win.setTitle("asdf");
+
+  Audio aud = Audio();
 
   float vertices[] = {
     -0.5f, -0.5f, 0.0f,
@@ -66,13 +67,12 @@ spdlog::debug("Entering mainloop");
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     float time = glfwGetTime();
-    float clr = (sin(time * 10)) + 1.75f;
+    float clr = (sin(time * 10)) + 1.25f;
 
     if (clrPrev < clr && togg == true) {
-      // spdlog::debug("peak? {}", clr);
+      aud.playSound("./res/audio/smash.wav");
       togg = false;
     } else if  (clrPrev > clr && togg == false) {
-      // spdlog::debug("peak? {}", clr);
       togg = true;
     }
 

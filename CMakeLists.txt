@@ -36,18 +36,14 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 include_directories("${CMAKE_SOURCE_DIR}/lib/")
 include_directories("${CMAKE_SOURCE_DIR}/lib/glfw/include")
 include_directories("${CMAKE_SOURCE_DIR}/lib/spdlog/include")
-include_directories("${CMAKE_SOURCE_DIR}/lib/openal-soft/include")
-include_directories("${CMAKE_SOURCE_DIR}/lib/libsndfile/include")
 
 add_subdirectory("lib/spdlog/")
 add_subdirectory("lib/glfw/")
-add_subdirectory("lib/openal-soft/")
-add_subdirectory("lib/libsndfile/")
+# add_subdirectory("lib/miniaudio/")
 find_package(OpenGL REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
-  SndFile::sndfile
-  OpenAL::OpenAL
+target_link_libraries(${PROJECT_NAME} PRIVATE
+  # MINIAUDIO
   glfw
   spdlog::spdlog
   OpenGL::GL
