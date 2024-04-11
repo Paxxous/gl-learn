@@ -69,7 +69,7 @@ spdlog::debug("Entering mainloop");
     float clr = (sin(time * 10)) + 1.75f;
 
     if (clrPrev < clr && togg == true) {
-      spdlog::debug("peak? {}", clr);
+      // spdlog::debug("peak? {}", clr);
       togg = false;
     } else if  (clrPrev > clr && togg == false) {
       // spdlog::debug("peak? {}", clr);
