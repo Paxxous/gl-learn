@@ -17,11 +17,23 @@
 // lmao
 void grabConfig(int &s, std::string &p) {
   std::fstream f("config.json");
-  nlohmann::json dat = nlohmann::json::parse(f);
+  nlohmann::json dat;
 
   // holy modern c++ (i gotta learn that)
-  int fuckspeed = dat["speed"].template get<int>();
-  std::string soundpath = dat["sound"].template get<std::string>();
+  int fuckspeed;
+  std::string soundpath;
+
+  try {
+    dat = nlohmann::json::parse(f);
+    fuckspeed = dat["speed"].template get<int>();
+    soundpath = dat["sound"].template get<std::string>();
+  }
+  catch (nlohmann::json::parse_error& ex) {
+    spdlog::error("Error reading config.json. Setting to defaults...");
+
+    fuckspeed = 7;
+    soundpath = "./res/audio/smash.wav";
+  }
 
   spdlog::debug("fucking speed: {}", std::to_string(fuckspeed));
   spdlog::debug("fuck sound: {}", soundpath);
