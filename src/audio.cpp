@@ -1,5 +1,6 @@
 #include "audio.hpp"
 
+#define MINIAUDIO_IMPLEMENTATION
 #include <spdlog/spdlog.h>
 
 Audio::Audio() {

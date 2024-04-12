@@ -1,15 +1,34 @@
 // FUCK YOU MINIAUDIO WHY IS MY COMPILER SO FUKCING SLOW AGGGG
-#define MINIAUDIO_IMPLEMENTATION
 #define GLFW_INCLUDE_NONE
+#define MINIAUDIO_IMPLEMENTATION
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
+#include <nlohmann/json.hpp>
+// #include <iostream>
+#include <fstream>
 
 #include "audio.hpp"
 #include "constants.hpp"
 #include "shader.hpp"
 #include "window.hpp"
+
+// lmao
+void grabConfig(int &s, std::string &p) {
+  std::fstream f("config.json");
+  nlohmann::json dat = nlohmann::json::parse(f);
+
+  // holy modern c++ (i gotta learn that)
+  int fuckspeed = dat["speed"].template get<int>();
+  std::string soundpath = dat["sound"].template get<std::string>();
+
+  spdlog::debug("fucking speed: {}", std::to_string(fuckspeed));
+  spdlog::debug("fuck sound: {}", soundpath);
+
+  p = soundpath;
+  s = fuckspeed;
+}
 
 int main() {
   spdlog::set_level(spdlog::level::debug);
@@ -21,6 +40,10 @@ int main() {
   win.setTitle("window fucks you");
 
   Audio aud = Audio();
+
+  int speed;
+  std::string soundpath;
+  grabConfig(speed, soundpath);
 
   float vertices[] = {
    -0.5f, -0.5f, 0.0f,
@@ -70,14 +93,14 @@ int main() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     float time = glfwGetTime();
-    float clr = (sin(time * 10)) + 1.25f;
+    float clr = (sin(time * speed)) + 1.25f;
 
     if (clrPrev < clr && togg == true) {
       title = std::string("triangle fucks you ") += std::to_string(fucked) += std::string(" times");
       win.setTitle(title.c_str());
-      fucked++;
+      aud.playSound(soundpath.c_str());
 
-      aud.playSound("./res/audio/smash.wav");
+      fucked++;
       togg = false;
     } else if (clrPrev > clr && togg == false) {
       togg = true;
