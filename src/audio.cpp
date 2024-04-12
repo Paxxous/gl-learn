@@ -18,3 +18,5 @@ void Audio::playSound(const char* path) {
   ma_engine_play_sound(&engine, path, NULL);
 }
 
+void setPitch(int pitch) {
+}
