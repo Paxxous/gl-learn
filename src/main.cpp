@@ -1,47 +1,15 @@
-// FUCK YOU MINIAUDIO WHY IS MY COMPILER SO FUKCING SLOW AGGGG
 #define GLFW_INCLUDE_NONE
-#define MINIAUDIO_IMPLEMENTATION
 
-#include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <spdlog/spdlog.h>
 #include <nlohmann/json.hpp>
-// #include <iostream>
-#include <fstream>
 
-#include "audio.hpp"
 #include "constants.hpp"
 #include "shader.hpp"
 #include "window.hpp"
 
 // lmao
-void grabConfig(int &s, std::string &p) {
-  std::fstream f("config.json");
-  nlohmann::json dat;
-
-  // holy modern c++ (i gotta learn that)
-  int fuckspeed;
-  std::string soundpath;
-
-  try {
-    dat = nlohmann::json::parse(f);
-    fuckspeed = dat["speed"].template get<int>();
-    soundpath = dat["sound"].template get<std::string>();
-  }
-  catch (nlohmann::json::parse_error& ex) {
-    spdlog::error("Error reading config.json. Setting to defaults...");
-
-    fuckspeed = 7;
-    soundpath = "./res/audio/smash.wav";
-  }
-
-  spdlog::debug("fucking speed: {}", std::to_string(fuckspeed));
-  spdlog::debug("fuck sound: {}", soundpath);
-
-  p = soundpath;
-  s = fuckspeed;
-}
-
 int main() {
   spdlog::set_level(spdlog::level::debug);
   spdlog::info("project vrsn: {}", VERSION);
@@ -51,14 +19,8 @@ int main() {
   GLFWwindow *handle = win.getWinHandle();
   win.setTitle("window fucks you");
 
-  Audio aud = Audio();
-
-  int speed;
-  std::string soundpath;
-  grabConfig(speed, soundpath);
-
   float vertices[] = {
-   -0.5f, -0.5f, 0.0f,
+    -0.5f, -0.5f, 0.0f,
     0.5f, -0.5f, 0.0f,
     0.0f,  0.5f, 0.0f,
 
@@ -104,24 +66,6 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    float time = glfwGetTime();
-    float clr = (sin(time * speed)) + 1.25f;
-
-    if (clrPrev < clr && togg == true) {
-      title = std::string("triangle fucks you ") += std::to_string(fucked) += std::string(" times");
-      win.setTitle(title.c_str());
-      aud.playSound(soundpath.c_str());
-
-      fucked++;
-      togg = false;
-    } else if (clrPrev > clr && togg == false) {
-      togg = true;
-    }
-
-    clrPrev = clr;
-
-    int vertexColorLocation = glGetUniformLocation(shader.getShaderID(), "posQ");
-    glUniform1f(vertexColorLocation, clr);
     glUseProgram(shader.getShaderID());
     glDrawArrays(GL_TRIANGLES, 0, 3);
 
