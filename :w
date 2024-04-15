@@ -19,19 +19,26 @@ int main() {
   GLFWwindow *handle = win.getWinHandle();
   win.setTitle("window");
 
+  // float vertices[] = {
+  //   0.0f, 0.5f,
+  //   -0.5f, -0.5f,
+  //   0.5f, -0.5f
+  // };
+
   float vertices[] = {
-    0.0f, 0.5f,
-    -0.5f, -0.5f,
-    0.5f, -0.5f
+    -1.0f, 1.0f,
+    0.0f, 0.0f,
+    1.0f, 1.0f,
+
+    -1.0f, -1.0f,
+    0.0f, 0.0f,
+    1.0f, -1.0f,
   };
 
-  // compile and link shaders
-  Shader shdr = Shader(
-    "./res/shdrs/vertexShader.glsl",
-    "./res/shdrs/fragmentShader.glsl"
-  );
+  float indices[] = {
+    0.0f, 0.0f,
+  };
 
-  // create VAO
   unsigned int VAO;
   glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
@@ -42,6 +49,11 @@ int main() {
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+  unsigned int EBO;
+  glGenBuffers(1, &EBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
   // tell gpu how to parse vertices
   unsigned int vert_array_index = 0;
   glVertexAttribPointer(vert_array_index, 2, GL_FLOAT, GL_FALSE,
@@ -49,11 +61,11 @@ int main() {
       0 /* or nullptr? */);
   glEnableVertexAttribArray(vert_array_index);
 
-  // unbind all.
-  glBindVertexArray(0);
-  glBindBuffer(VBO, 0);
-  glUseProgram(0);
-
+  // compile and link shaders
+  Shader shdr = Shader(
+    "./res/shdrs/vertexShader.glsl",
+    "./res/shdrs/fragmentShader.glsl"
+  );
 
   spdlog::debug("Entering mainloop");
   while (!glfwWindowShouldClose(handle)) {
@@ -66,10 +78,10 @@ int main() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     // Render triangles
-    glBindVertexArray(VAO);
-
     glUseProgram(shdr.getShaderID());
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    // glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     // glUseProgram(0); // unuse
 
     glfwSwapBuffers(handle);

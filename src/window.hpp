@@ -8,18 +8,18 @@
 
 
 class Win {
-  private:
-    int window_width;
-    int window_height;
-
-    GLFWwindow *win;
-
   public:
     Win(int w_w, int w_h);
     
     void setTitle(const char* t);
 
     GLFWwindow* getWinHandle();
+
+  private:
+    int window_width;
+    int window_height;
+
+    GLFWwindow *win;
 };
 
 void err_callback(int err, const char *description);
