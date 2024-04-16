@@ -44,7 +44,6 @@ add_subdirectory("lib/json/")
 find_package(OpenGL REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  # MINIAUDIO
   glfw
   spdlog::spdlog
   OpenGL::GL

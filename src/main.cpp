@@ -1,13 +1,14 @@
 #define GLFW_INCLUDE_NONE
+#define STB_IMAGE_IMPLEMENTATION
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
-// #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 
 #include "constants.hpp"
 #include "shader.hpp"
 #include "window.hpp"
+#include "img.hpp"
 
 // https://docs.gl/
 int main() {
@@ -20,10 +21,27 @@ int main() {
   win.setTitle("window");
 
   float vertices[] = {
-    0.0f, 0.5f,
-    -0.5f, -0.5f,
-    0.5f, -0.5f
+    // vertices
+    0.0f, 0.5f, 0.0f,
+    -0.5f, -0.5f, 0.0f,
+    0.5f, -0.5f, 0.0f,
+
+    // colors
+    1.0f, 0.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.0f, 0.0f, 1.0f,
+    
+    // image textures
+    0.0, 0.0f,
+    1.0f, 0.0f,
+    0.5f, 1.0f
   };
+
+  // create VAO
+  unsigned int VAO;
+  glGenVertexArrays(1, &VAO);
+  glBindVertexArray(VAO);
+
 
   // compile and link shaders
   Shader shdr = Shader(
@@ -31,29 +49,49 @@ int main() {
     "./res/shdrs/fragmentShader.glsl"
   );
 
-  // create VAO
-  unsigned int VAO;
-  glGenVertexArrays(1, &VAO);
-  glBindVertexArray(VAO);
-
   // allocate mem and upload vertices to gpu
   unsigned int VBO;
   glGenBuffers(1, &VBO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-  // tell gpu how to parse vertices
-  unsigned int vert_array_index = 0;
-  glVertexAttribPointer(vert_array_index, 2, GL_FLOAT, GL_FALSE,
-      0 /* or you can 3 * sizeof(float), but it tightly packed */,
-      0 /* or nullptr? */);
-  glEnableVertexAttribArray(vert_array_index);
+  // tell gpu how to parse pos vertices
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)0);
+  glEnableVertexAttribArray(0);
+
+  // now tell it how to parse color verts
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, (void*)(sizeof(float) * 9));
+  glEnableVertexAttribArray(1);
+
+  // now tell it how to parse the texture coords
+  glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (void*)(sizeof(float) * 18));
+  glEnableVertexAttribArray(2);
+
+  // configure image wrapping for both S and T axis (s+t correspond to x+y)
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+  // set up how scaling is filtered.
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  // set up how mipmaps are also filtered (im reusing code i thnk lmao ill deal withit later)
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+  Image img = Image("./res/img/wood.jpg");
+
+  unsigned int texture;
+  glGenTextures(1, &texture);
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, texture);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.getWidth(), img.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, img.dat);
+  // glUniform1i(glGetUniformLocation(shdr.getShaderID(), "ourTexture"), 0);
 
   // unbind all.
-  glBindVertexArray(0);
-  glBindBuffer(VBO, 0);
-  glUseProgram(0);
-
+  // glBindVertexArray(0);
+  // glBindBuffer(VBO, 0);
+  // glUseProgram(0);
 
   spdlog::debug("Entering mainloop");
   while (!glfwWindowShouldClose(handle)) {
@@ -67,7 +105,6 @@ int main() {
 
     // Render triangles
     glBindVertexArray(VAO);
-
     glUseProgram(shdr.getShaderID());
     glDrawArrays(GL_TRIANGLES, 0, 6);
     // glUseProgram(0); // unuse
