@@ -39,8 +39,8 @@ int main() {
     0.0f, 0.0f, 1.0f,
     
     // image textures
-    0.5f, 1.0f,
-    1.0f, 0.0f,
+    1.5f, 3.0f,
+    3.0f, 0.0f,
     0.0, 0.0f,
   };
 
@@ -72,8 +72,8 @@ int main() {
   glBindTexture(GL_TEXTURE_2D, wood_texture);
 
   // configure image wrapping for both S and T axis (s+t correspond to x+y)
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
   // set up how mipmaps are also filtered (im reusing code i thnk lmao ill deal withit later)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
