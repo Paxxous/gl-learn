@@ -6,15 +6,15 @@
 class Image {
   public:
     Image(std::string src, bool flip);
-    Image(std::string src);
+    Image(std::string src); // maybe remove overload?
     ~Image();
 
     int getWidth();
     int getHeight();
-    // unsigned char* data();
+    unsigned char* getData();
 
-    unsigned char* dat;
 
   private:
     int width, height, nrChannels;
+    unsigned char* dat;
 };

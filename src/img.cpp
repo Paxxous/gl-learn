@@ -39,6 +39,6 @@ int Image::getHeight() {
   return height;
 }
 
-// unsigned char* Image::data() {
-//   return dat;
-// }
+unsigned char* Image::getData() {
+  return dat;
+}

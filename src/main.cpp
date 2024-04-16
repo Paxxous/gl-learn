@@ -26,7 +26,7 @@ int main() {
     "./res/shdrs/fragmentShader.glsl"
   );
 
-  // define our vertices
+  // define our vertices (no it is not a square >:( )
   float vertices[] = {
     // vertices
     0.0f, 0.5f, 0.0f,
@@ -75,16 +75,12 @@ int main() {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
-  // set up how scaling is filtered.
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
   // set up how mipmaps are also filtered (im reusing code i thnk lmao ill deal withit later)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   Image wood = Image("./res/img/wood.jpg", true);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wood.getWidth(), wood.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, wood.dat);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, wood.getWidth(), wood.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, wood.getData());
   glGenerateMipmap(GL_TEXTURE_2D);
 
   unsigned int well_texture;
@@ -96,7 +92,7 @@ int main() {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   Image me = Image("./res/img/welly.jpg", true);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, me.getWidth(), me.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, me.dat);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, me.getWidth(), me.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, me.getData());
   glGenerateMipmap(GL_TEXTURE_2D);
 
   glUseProgram(shdr.getShaderID());
