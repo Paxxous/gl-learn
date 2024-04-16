@@ -5,6 +5,7 @@
 
 class Image {
   public:
+    Image(std::string src, bool flip);
     Image(std::string src);
     ~Image();
 

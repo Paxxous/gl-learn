@@ -5,6 +5,18 @@
 #include <spdlog/spdlog.h>
 
 // load our image here
+Image::Image(std::string src, bool flip) {
+  if (flip) {
+    stbi_set_flip_vertically_on_load(true);  
+  }
+
+  dat = stbi_load(src.c_str(), &width, &height, &nrChannels, 0);
+  if (!dat) {
+    spdlog::error("error loading texture {}:\n{}",
+        src, stbi_failure_reason());
+  }
+}
+
 Image::Image(std::string src) {
   dat = stbi_load(src.c_str(), &width, &height, &nrChannels, 0);
   if (!dat) {
