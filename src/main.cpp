@@ -29,9 +29,9 @@ int main() {
   // define our vertices (no it is not a square >:( )
   float vertices[] = {
     // vertices
-    0.0f, 0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f,
+    0.0f, 0.75f, 0.0f,
+    -0.75f, -0.75f, 0.0f,
+    0.75f, -0.75f, 0.0f,
 
     // colors
     1.0f, 0.0f, 0.0f,
@@ -72,8 +72,8 @@ int main() {
   glBindTexture(GL_TEXTURE_2D, wood_texture);
 
   // configure image wrapping for both S and T axis (s+t correspond to x+y)
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
   // set up how mipmaps are also filtered (im reusing code i thnk lmao ill deal withit later)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
