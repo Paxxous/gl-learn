@@ -7,6 +7,7 @@ class Shader {
   public:
     Shader(std::string vs, std::string fs);
     unsigned int getShaderID();
+    unsigned int getUniform(const char* uniform);
 
   private:
     unsigned int shaderProgram;

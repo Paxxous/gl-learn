@@ -5,6 +5,10 @@
 #include <glad/glad.h>
 #include <spdlog/spdlog.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "constants.hpp"
 #include "shader.hpp"
 #include "window.hpp"
@@ -100,9 +104,21 @@ int main() {
   glUniform1i(glGetUniformLocation(shdr.getShaderID(), "tex2"), 1);
 
   // unbind all.
-  // glBindVertexArray(0);
-  // glBindBuffer(VBO, 0);
-  // glUseProgram(0);
+  glBindVertexArray(0);
+  glBindBuffer(VBO, 0);
+  glUseProgram(0);
+
+  // transformations chapter.
+  glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f); // create a vector
+  glm::mat4 trans = glm::mat4(1.0f); // create identity matrix
+  trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f)); // fuck... uh
+                                                              // we create a transformation matrix using glm::translate.
+                                                              // we do this through passing in the matrix and a translation vector
+                                                              // the identity matrix is basically multiplied by the translation vector
+                                                              // it then returns the transformation matrix.
+  vec = trans * vec; // multiply the two, translate the vector :)
+  spdlog::debug("transformation dat, x: {}, y: {}, z: {}",
+      vec.x, vec.y, vec.z);
 
   spdlog::debug("Entering mainloop");
   while (!glfwWindowShouldClose(handle)) {
@@ -114,15 +130,24 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+    // bind textures
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, wood_texture);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, well_texture);
 
     // Render triangles
+    glUseProgram(shdr.getShaderID());
+    unsigned int transUniform = shdr.getUniform("trans");
+    glUniformMatrix4fv(transUniform, 1, GL_FALSE, glm::value_ptr(trans));
+
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glUseProgram(0); // unuse
+
+    // unbind all
+    glUseProgram(0);
+    glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     glfwSwapBuffers(handle);
     glfwPollEvents();

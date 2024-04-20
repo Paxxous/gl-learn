@@ -34,11 +34,13 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 include_directories("${CMAKE_SOURCE_DIR}/lib/")
+include_directories("${CMAKE_SOURCE_DIR}/lib/glm")
 include_directories("${CMAKE_SOURCE_DIR}/lib/glfw/include")
 include_directories("${CMAKE_SOURCE_DIR}/lib/spdlog/include")
 include_directories("${CMAKE_SOURCE_DIR}/lib/json/include")
 
 add_subdirectory("lib/spdlog/")
+add_subdirectory("lib/glm/")
 add_subdirectory("lib/glfw/")
 add_subdirectory("lib/json/")
 find_package(OpenGL REQUIRED)

@@ -78,3 +78,7 @@ unsigned int Shader::compileShader(unsigned int type, const std::string src) {
 unsigned int Shader::getShaderID() {
   return shaderProgram;
 }
+
+unsigned int Shader::getUniform(const char* uniform) {
+  return glGetUniformLocation(shaderProgram, uniform);
+}
