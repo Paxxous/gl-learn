@@ -108,23 +108,16 @@ int main() {
   glBindBuffer(VBO, 0);
   glUseProgram(0);
 
-  // transformations chapter.
-  glm::vec4 vec(1.0f, 0.0f, 0.0f, 1.0f); // create a vector
-  glm::mat4 trans = glm::mat4(1.0f); // create identity matrix
-  trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f)); // fuck... uh
-                                                              // we create a transformation matrix using glm::translate.
-                                                              // we do this through passing in the matrix and a translation vector
-                                                              // the identity matrix is basically multiplied by the translation vector
-                                                              // it then returns the transformation matrix.
-  vec = trans * vec; // multiply the two, translate the vector :)
-  spdlog::debug("transformation dat, x: {}, y: {}, z: {}",
-      vec.x, vec.y, vec.z);
 
   spdlog::debug("Entering mainloop");
   while (!glfwWindowShouldClose(handle)) {
     if (glfwGetKey(handle, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       glfwSetWindowShouldClose(handle, true);
     }
+
+    // transformations chapter.
+    glm::mat4 trans = glm::mat4(1.0f); // create identity matrix
+    trans = glm::rotate(trans, (float)glfwGetTime() * 2, glm::vec3(0.0, 0.0, 1.0));
 
     // make background black
     glClear(GL_COLOR_BUFFER_BIT);
