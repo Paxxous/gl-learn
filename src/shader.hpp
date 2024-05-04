@@ -16,4 +16,3 @@ class Shader {
     unsigned int compileShader(unsigned int type, const std::string src);
     std::string readFile(std::string path);
 };
-
